@@ -1,5 +1,5 @@
 {
-  "name": "fcc-learn-npm-package-json",
+  "name": "Timestamp-Microservice",
   "dependencies": {
     "express": "^4.16.2"
   },
@@ -12,6 +12,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://idontknow/todo.git"
+    "url": "https://github.com/shivams906/Timestamp-Microservice"
   }
 }

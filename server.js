@@ -22,21 +22,17 @@ if (!process.env.DISABLE_XORIGIN) {
     next();
   });
 }
-app.get('*', function(req, res) {
-  if (url.parse(req.url).pathname !== '/') {
-  var query = url.parse(req.url, true).pathname.substring(1);
-  if (query !== "" && Number.isInteger(Number(query)))
-    var date = new Date(Number(query));
+
+app.get('/:time', function(req, res) {
+  if (req.params.time !== "" && Number.isInteger(Number(req.params.time)))
+    var date = new Date(Number(req.params.time));
   else
-    var date = new Date(query.split('%20').join(' '));
+    var date = new Date(req.params.time.split('%20').join(' '));
   if (date == 'Invalid Date')
     var output = { "unix": null, "natural": null };
   else
   var output = { 'unix': date.getTime(), 'natural': date.toLocaleString('en-us', { month: "long" })+' '+date.getDate()+', '+date.getFullYear() };
   res.send(JSON.stringify(output));
-  }else {
-    res.sendFile(process.cwd() + '/views/index.html');
-  }
 })
 
 app.use('/public', express.static(process.cwd() + '/public'));
